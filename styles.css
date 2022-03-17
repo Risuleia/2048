@@ -7,18 +7,18 @@ body {
   display: -webkit-flex;
   display: -ms-flex;
   display: flex;
-  justify-content: center;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  justify-content: space-around;
   -ms-align-items: center;
   align-items: center;
   height: 100vh;
   margin: 0;
-  font-size: 7.5vmin;
+  font-size: 6vmin;
 }
 
 #game-board {
-  --grid-size: 4;
-  --cell-size: 20vmin;
-  --cell-gap: 20vmin;
   display: grid;
   grid-template-columns: repeat(var(--grid-size), var(--cell-size));
   grid-template-rows: repeat(var(--grid-size), var(--cell-size));
@@ -33,6 +33,12 @@ body {
   border-radius: 1vmin;
 }
 .tile {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  user-drag: none;
   position: absolute;
   display: -webkit-flex;
   display: -ms-flex;
@@ -42,4 +48,155 @@ body {
   align-items: center;
   width: var(--cell-size);
   height: var(--cell-size);
+  border-radius: 1vmin;
+  top: calc(var(--y) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
+  left: calc(var(--x) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
+  font-weight: bold;
+  background-color: hsl(250, 25%, var(--background-lightness));
+  color: hsl(250, 20%, var(--text-lightness));
+  -webkit-animation: 200ms ease-in-out;
+  animation: show 200ms ease-in-out;
+  transition: 100ms ease-in-out;
+}
+
+/* separator */
+#separator {
+  width: 2px;
+  height: 20vmax;
+  background-color: hsl(200, 25%, 90%);
+}
+
+/* score board */
+#score-board {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  justify-content: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+.score {
+  color: hsl(250, 20%, 80%);
+  font-size: 12vmin;
+  text-align: center
+  animation: show 200ms ease-in-out;
+}
+
+/* animations */
+@-webkit-keyframes show {
+  0% {
+    opacity: .5;
+    transform: scale(0);
+  }
+}
+@-o-keyframes show {
+  0% {
+    opacity: .5;
+    transform: scale(0);
+  }
+}
+@-moz-keyframes show {
+  0% {
+    opacity: .5;
+    transform: scale(0);
+  }
+}
+@keyframes show {
+  0% {
+    opacity: .5;
+    transform: scale(0);
+  }
+}
+
+@-webkit-keyframes vibrance {
+  0% { --hue: 40; }
+  5% { --hue: 50; }
+  10% { --hue: 60; }
+  15% { --hue: 70; }
+  20% { --hue: 80; }
+  25% { --hue: 90; }
+  30% { --hue: 100; }
+  35% { --hue: 110; }
+  40% { --hue: 120; }
+  45% { --hue: 130; }
+  50% { --hue: 140; }
+  55% { --hue: 150; }
+  60% { --hue: 160; }
+  65% { --hue: 170; }
+  70% { --hue: 180; }
+  75% { --hue: 190; }
+  80% { --hue: 200; }
+  85% { --hue: 210; }
+  90% { --hue: 220; }
+  95% { --hue: 230 }
+  100% { --hue: 240; }
+}
+@-o-keyframes vibrance {
+  0% { --hue: 40; }
+  5% { --hue: 50; }
+  10% { --hue: 60; }
+  15% { --hue: 70; }
+  20% { --hue: 80; }
+  25% { --hue: 90; }
+  30% { --hue: 100; }
+  35% { --hue: 110; }
+  40% { --hue: 120; }
+  45% { --hue: 130; }
+  50% { --hue: 140; }
+  55% { --hue: 150; }
+  60% { --hue: 160; }
+  65% { --hue: 170; }
+  70% { --hue: 180; }
+  75% { --hue: 190; }
+  80% { --hue: 200; }
+  85% { --hue: 210; }
+  90% { --hue: 220; }
+  95% { --hue: 230 }
+  100% { --hue: 240; }
+}
+@-moz-keyframes vibrance {
+  0% { --hue: 40; }
+  5% { --hue: 50; }
+  10% { --hue: 60; }
+  15% { --hue: 70; }
+  20% { --hue: 80; }
+  25% { --hue: 90; }
+  30% { --hue: 100; }
+  35% { --hue: 110; }
+  40% { --hue: 120; }
+  45% { --hue: 130; }
+  50% { --hue: 140; }
+  55% { --hue: 150; }
+  60% { --hue: 160; }
+  65% { --hue: 170; }
+  70% { --hue: 180; }
+  75% { --hue: 190; }
+  80% { --hue: 200; }
+  85% { --hue: 210; }
+  90% { --hue: 220; }
+  95% { --hue: 230 }
+  100% { --hue: 240; }
+}
+@keyframes vibrance {
+  0% { --hue: 40; }
+  5% { --hue: 50; }
+  10% { --hue: 60; }
+  15% { --hue: 70; }
+  20% { --hue: 80; }
+  25% { --hue: 90; }
+  30% { --hue: 100; }
+  35% { --hue: 110; }
+  40% { --hue: 120; }
+  45% { --hue: 130; }
+  50% { --hue: 140; }
+  55% { --hue: 150; }
+  60% { --hue: 160; }
+  65% { --hue: 170; }
+  70% { --hue: 180; }
+  75% { --hue: 190; }
+  80% { --hue: 200; }
+  85% { --hue: 210; }
+  90% { --hue: 220; }
+  95% { --hue: 230 }
+  100% { --hue: 240; }
 }

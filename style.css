@@ -1,0 +1,13 @@
+*, *::after, *::before {
+  border-box: border-box;
+  font-family: Arial;
+}
+#game-board {
+  display: grid;
+  grid-template-columns: repeat(4, 20vmin);
+  grid-template-rows: repeat(4, 20vmin);
+  background-color: #ccc;
+}
+.cell {
+  background-color: #aaa;
+}

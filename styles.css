@@ -1,0 +1,45 @@
+*, *::after, *::before {
+  box-sizing: border-box;
+  font-family: Arial;
+}
+body {
+  background-color: #333;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  justify-content: center;
+  -ms-align-items: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-size: 7.5vmin;
+}
+
+#game-board {
+  --grid-size: 4;
+  --cell-size: 20vmin;
+  --cell-gap: 20vmin;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-size), var(--cell-size));
+  grid-template-rows: repeat(var(--grid-size), var(--cell-size));
+  background-color: #ccc;
+  border-radius: 1vmin;
+  gap: var(--cell-gap);
+  padding: var(--cell-gap);
+  position: relative;
+}
+.cell {
+  background-color: #aaa;
+  border-radius: 1vmin;
+}
+.tile {
+  position: absolute;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  justify-content: center;
+  -ms-align-items: center;
+  align-items: center;
+  width: var(--cell-size);
+  height: var(--cell-size);
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2048</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="script.js"></script>
+    <script type="module" src="Components/Grid.js"></script>
+</head>
+<body>
+    <div id="header">
+        <div class="title">
+            <h1 class="first-letter">2</h1>
+            <h1 class="remaining-letters">048</h1>
+        </div>
+        <div class="right-section">
+            <button class="restart material-symbols-rounded">restart_alt</button>
+            <div class="scores-section">
+                <span class="scores">0</span>
+                <p class="score-title">Score</p>
+            </div>
+        </div>
+    </div>
+    <div id="game-board" select="false">
+        <div id="lose">
+            <div class="state-text">You lost</div>
+            <!-- <div class="back-blur"></div> -->
+        </div>
+        <div id="win">
+            <div class="state-text">You won</div>
+            <!-- <div class="back-blur"></div> -->
+        </div>
+    </div>
+</body>
+</html>

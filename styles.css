@@ -19,7 +19,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: stretch;
+    align-items: center;
     height: 100vh;
     margin: 0 auto;
     width: min-content;
@@ -40,6 +40,7 @@ body {
     position: relative;
     padding: var(--cell-gap);
     margin: auto 0;
+    margin-top: 2vmin;
     font-size: 7.5vmin;
     background-color: var(--accent-1);
     aspect-ratio: 1;
@@ -145,6 +146,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 0 2vmin;
+    margin-top: 2vmin;
 }
 .title {
     display: flex;

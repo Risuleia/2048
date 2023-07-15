@@ -44,6 +44,85 @@ export default class Grid {
         const randI = Math.floor(Math.random() * this.#emptyCells.length)
         return this.#emptyCells[randI]
     }
+
+    // handling tile move 
+    moveUp() {
+        return this.#slideTiles(this.cellsByColumn)
+    }
+    moveDown() {
+        return this.#slideTiles(this.cellsByColumn.map(column => [...column].reverse()))
+    }
+    moveLeft() {
+        return this.#slideTiles(this.cellsByRow)
+    }
+    moveRight() {
+        return this.#slideTiles(this.cellsByRow.map(row => [...row].reverse()))
+    }
+
+    #slideTiles(cells) {
+        return Promise.all(
+            cells.flatMap(group => {
+                const promises = []
+                for (let i = 1; i < group.length; i++) {
+                    const cell = group[i]
+                    if (!cell.tile) continue
+                    let lastValidCell
+    
+                    for (let j = i - 1; j >= 0; j--) {
+                        const moveToCell = group[j]
+                        if (!moveToCell.canAccept(cell.tile)) break
+                        lastValidCell = moveToCell
+                    }
+    
+                    if (lastValidCell) {
+                        promises.push(cell.tile.waitForTransition())
+                        if (lastValidCell.tile)  {
+                            lastValidCell.mergeTile = cell.tile
+                        } else {
+                            lastValidCell.tile = cell.tile
+                        }
+                        cell.tile = null
+                    }
+                }
+                return promises
+            })
+        )       
+    }
+
+    // handling movement check
+    canMoveTilesInAnyDirection(instance) {
+        return (
+            this.canMoveUp(instance) ||
+            this.canMoveLeft(instance) ||
+            this.canMoveDown(instance) ||
+            this.canMoveRight(instance)
+        )
+    }
+    
+    canMoveUp() {
+        return this.#canMove(this.cellsByColumn)
+    }
+    canMoveDown() {
+        return this.#canMove(this.cellsByColumn.map(column => [...column].reverse()))
+    }
+    canMoveLeft() {
+        return this.#canMove(this.cellsByRow)
+    }
+    canMoveRight() {
+        return this.#canMove(this.cellsByRow.map(row => [...row].reverse()))
+    }
+    
+    #canMove(cells) {
+        return cells.some(group => {
+            return group.some((cell, i) => {
+                if (i === 0) return false
+                if (!cell.tile) return false
+                const moveToCell = group[i - 1]
+                return moveToCell.canAccept(cell.tile)
+            })
+        })
+    }
+
 }
 
 function createCellElements(gridElement) {

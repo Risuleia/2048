@@ -198,6 +198,7 @@ body {
     filter: contrast(1) brightness(1);
     transition: filter 150ms ease-in-out;
 }
+
 .scores-section {
     display: flex;
     flex-direction: column;

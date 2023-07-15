@@ -52,6 +52,7 @@ export default class Cell {
         scores.increaseScore(v)
         this.mergeTile.remove()
         this.mergeTile = null
+        return this.tile.value
     }
 
 }

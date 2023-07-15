@@ -24,8 +24,8 @@ export default class Score {
         if (!val) return
         if (isNaN(parseInt(val))) return
         // console.log(val)
-        // console.log(this.score)
         this.score = this.score + val
+        console.log(this.score)
         this.elem.textContent = this.score + val
     }
 

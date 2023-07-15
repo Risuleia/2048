@@ -7,17 +7,26 @@ export default class Instance {
     #score
     #state
 
-    constructor(gridElem, scoreElem) {
-        this.gridElem = gridElem
-        this.scoreElem = scoreElem
+    #gridElem
+    #scoreElem
 
-        this.#grid = new Grid(gridElem)
-        this.#grid.randomEmptyCell().tile = new Tile(gridElem)
-        this.#grid.randomEmptyCell().tile = new Tile(gridElem)
+    constructor(gridElem, scoreElem) {
+        this.#gridElem = gridElem
+        this.#scoreElem = scoreElem
+
+        this.#grid = new Grid(this.#gridElem)
+        this.#grid.randomEmptyCell().tile = new Tile(this.#gridElem)
+        this.#grid.randomEmptyCell().tile = new Tile(this.#gridElem)
 
         this.#score = new Score(scoreElem)
     }
 
+    get gridElem() {
+        return this.#gridElem
+    }
+    get scoreElem() {
+        return this.#scoreElem
+    }
 
     get grid() {
         return this.#grid

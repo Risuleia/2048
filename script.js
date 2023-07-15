@@ -1,7 +1,7 @@
 import Tile from "./Components/Tile.js"
 import Instance from "./Components/Instance.js"
 import InputHandler from "./Functions/InputHandler.js"
-import InvalidMove from "./Functions/InvalidMove.js"
+import InvalidMoveError from "./Functions/InvalidMoveError.js"
 import gameOver from "./Functions/gameOver.js"
 import gameWin from "./Functions/gameWin.js"
 
@@ -20,8 +20,9 @@ async function handleInput(dir) {
     try {
         await moveTiles(dir)
     } catch (e) {
-        if (e instanceof InvalidMove) {
-            if (instance.grid.canMoveTilesInAnyDirection()) return inputHandler.setupInput()
+        if (e instanceof InvalidMoveError) {
+            if (instance.grid.canMoveTilesInAnyDirection()) inputHandler.setupInput()
+            return
         }
         throw e
     }
@@ -62,28 +63,27 @@ async function moveTiles(dir) {
     switch (dir) {
         case "ArrowUp":
         case "w":
-            if (!instance.grid.canMoveUp()) throw new InvalidMove()
+            if (!instance.grid.canMoveUp()) throw new InvalidMoveError()
             await instance.grid.moveUp()
-            break;
+            return;
         case "ArrowDown":
         case "s":
-            if (!instance.grid.canMoveDown()) throw new InvalidMove()
+            if (!instance.grid.canMoveDown()) throw new InvalidMoveError()
             await instance.grid.moveDown()
-            break;
+            return;
         case "ArrowLeft":
         case "a":
-            if (!instance.grid.canMoveLeft()) throw new InvalidMove()
+            if (!instance.grid.canMoveLeft()) throw new InvalidMoveError()
             await instance.grid.moveLeft()
-            break;
+            return;
         case "ArrowRight":
         case "d":
-            if (!instance.grid.canMoveRight()) throw new InvalidMove()
+            if (!instance.grid.canMoveRight()) throw new InvalidMoveError()
             await instance.grid.moveRight()
-            break;
+            return;
     
         default:
-            inputHandler.setupInput()
-            return;
+            throw new InvalidMoveError()
     }
 }
 

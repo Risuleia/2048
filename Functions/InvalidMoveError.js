@@ -1,4 +1,4 @@
-export default class InvalidMove extends Error {
+export default class InvalidMoveError extends Error {
     constructor(...params) {
         super(...params)
 

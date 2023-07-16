@@ -222,7 +222,7 @@ body {
 }
 
 /* signature */
-/* #sign {
+#sign {
     display: flex;
     font-size: 3rem;
     position: fixed;
@@ -234,7 +234,7 @@ body {
     font-family: 'Mr De Haviland';
     color: var(--accent-4);
     z-index: 999;
-} */
+}
 
 /* animations */
 @keyframes appear {

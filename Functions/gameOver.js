@@ -1,4 +1,4 @@
-export function gameOver(gameBoard, scoreBoard, instance, inputHandler) {
+export function gameOver(gameBoard, instance, inputHandler) {
     gameBoard.setAttribute('game-state', 'lose')
     gameBoard.querySelector('#lose').addEventListener('click', () => {
         instance.state = 'lose'

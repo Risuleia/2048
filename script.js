@@ -2,8 +2,6 @@ import Tile from "./Components/Tile.js"
 import Instance from "./Components/Instance.js"
 import InputHandler from "./Functions/InputHandler.js"
 import InvalidMoveError from "./Functions/InvalidMoveError.js"
-import gameOver from "./Functions/gameOver.js"
-import gameWin from "./Functions/gameWin.js"
 
 const gameBoard = document.getElementById("game-board")
 const scoreBoard = document.querySelector('.scores')
@@ -34,9 +32,16 @@ async function handleInput(dir) {
 
     if (!instance.grid.canMoveTilesInAnyDirection(instance)) {
         newTile.waitForTransition(true).then(() => {
-            gameOver(gameBoard, instance)
-            instance = new Instance(gameBoard, scoreBoard)
-            inputHandler.setupInput()
+            inputHandler.stopInput()
+            
+            gameBoard.setAttribute('game-state', 'lose')
+            gameBoard.querySelector('#lose').addEventListener('click', () => {
+                instance.state = 'lose'
+                instance.end()
+                gameBoard.removeAttribute('game-state')
+                instance = new Instance(gameBoard, scoreBoard)
+                inputHandler.setupInput()
+            })
         })
     } else if (instance.grid.canMoveTilesInAnyDirection(instance)) inputHandler.setupInput()
     if (
@@ -44,8 +49,8 @@ async function handleInput(dir) {
         instance.grid.cells.some(cell => cell?.tile?.value === "2048" || cell?.mergeTile?.value === "2048")
         ) {
         newTile.waitForTransition(true).then(() => {
-            gameWin(gameBoard, instance)
-            inputHandler.setupInput()
+            inputHandler.stopInput()
+            gameWin(gameBoard, instance, inputHandler)
         })
         restart_btn.removeEventListener('click')
         restart_btn.addEventListener('click', () => {
@@ -95,6 +100,25 @@ restart_btn.addEventListener('click', () => {
     instance = new Instance(gameBoard, scoreBoard)
     inputHandler.setupInput(instance)
 })
+
+// utility functions
+function gameOver(gameBoard, scoreBoard, instance, inputHandler) {
+    gameBoard.setAttribute('game-state', 'lose')
+    gameBoard.querySelector('#lose').addEventListener('click', () => {
+        instance.state = 'lose'
+        instance.end()
+        gameBoard.removeAttribute('game-state')
+        inputHandler.setupInput()
+    })
+}
+function gameWin(gameBoard, instance, inputHandler) {
+    gameBoard.setAttribute('game-state', 'win')
+    gameBoard.querySelector('#win').addEventListener('click', () => {
+        instance.state = 'continuing'
+        gameBoard.setAttribute('game-state', 'continuing')
+        inputHandler.setupInput()
+    })
+}
 
 // document.querySelector('.button').addEventListener('click', () => {
 //     const new_tile = new Tile(gameBoard)

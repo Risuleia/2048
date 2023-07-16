@@ -18,15 +18,13 @@ export default class Score {
         // if (!val) return
         // if (isNaN(parseInt(val))) return
         this.#score = val
+        this.#scoreElement.textContent = val 
     }
 
     increaseScore(val) {
         if (!val) return
         if (isNaN(parseInt(val))) return
-        // console.log(val)
-        this.score = this.score + val
-        console.log(this.score)
-        this.elem.textContent = this.score + val
+        this.score += val
     }
 
 }

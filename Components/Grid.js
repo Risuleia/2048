@@ -1,7 +1,7 @@
 import Cell from "./Cell.js"
 
 const GRID_SIZE = 4
-const CELL_SIZE = 18
+const CELL_SIZE = 19
 const CELL_GAP = 2
 
 export default class Grid {

@@ -54,7 +54,7 @@ export default class InputHandler {
                 await this.#callback(distX > 0 ? "d" : "a")
             }
             if (Math.abs(distY) >= THRESHOLD_DIST) {
-                await this.#callback(distY > 0 ? "s" : "d")
+                await this.#callback(distY > 0 ? "s" : "w")
             }
             this.setupInput()
         }, { once: true })

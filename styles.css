@@ -261,4 +261,7 @@ body {
     .score-title {
         font-size: 3vmin;
     }
+    .tile {
+        transition: 120ms ease-in-out;
+    }
 }

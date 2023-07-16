@@ -16,12 +16,12 @@ export default class InputHandler {
 
     setupInput() {
         window.addEventListener('keydown', this.#boundKeyboardInput, { once: true })
-        this.#gridElem.addEventListener('touchmove', this.#boundTouchStart, { once: true, passive: false })
+        document.body.addEventListener('touchmove', this.#boundTouchStart, { once: true, passive: false })
     }
 
     stopInput() {
         window.removeEventListener('keydown', this.#boundKeyboardInput)
-        this.#gridElem.removeEventListener('touchstart', this.#boundTouchStart)
+        document.body.removeEventListener('touchstart', this.#boundTouchStart)
     }
 
     async #handleKeyboardInput(e) {
@@ -37,9 +37,9 @@ export default class InputHandler {
         const startTouch = e.changedTouches[0]
         const startTime = new Date()
 
-        this.#gridElem.addEventListener('touchmove', handleTouch, { passive: false })
+        document.body.addEventListener('touchmove', handleTouch, { passive: false })
 
-        this.#gridElem.addEventListener('touchend', async e => {
+        document.body.addEventListener('touchend', async e => {
 
             const endTouch = e.changedTouches[0]
             if (new Date() - startTime > GESTURE_TIME) {
